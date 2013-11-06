@@ -19,7 +19,7 @@ describe Show do
   end
 
   it "has fanart" do
-    dexter.fanart.should == "fanart/original/79349-59.jpg"
+    dexter.fanart.should == "http://www.thetvdb.com/banners/fanart/original/79349-59.jpg"
   end
   
   it "has imdb_id" do
@@ -27,10 +27,16 @@ describe Show do
   end
   
   it "has a poster" do
-    dexter.poster.should == "posters/79349-2.jpg"
+    dexter.poster.should == "http://www.thetvdb.com/banners/posters/79349-2.jpg"
   end
 
   it "has a zap2it_id" do
     dexter.zap2it_id.should == "EP00859795"
+  end
+
+  it "must be unique show" do
+    show1 = Show.create(:db_id => 1)
+    show2 = Show.new(:db_id => 1)
+    show2.should_not be_valid
   end
 end

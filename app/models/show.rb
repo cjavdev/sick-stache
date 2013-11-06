@@ -1,8 +1,8 @@
 class Show < ActiveRecord::Base
   attr_accessible :db_id, :name
-
+  validates :db_id, uniqueness: true, presence: true
   has_many :episodes
-  
+
   def actors
     @_actors ||= series.actors
   end
@@ -14,16 +14,20 @@ class Show < ActiveRecord::Base
   def airs_day_of_week
     @_dow ||= series.airs_day_of_week
   end
-  
+
   def airs_time
     @_time ||= series.airs_time
   end
 
-   def fanart
-    @_fanart ||= series.poster
+  def fanart
+    @_fanart ||= series.fanart
   end
 
- def poster
+  def zap2it_id
+    @_zap2it_id ||= series.zap2it_id
+  end
+
+  def poster
     @_poster ||= series.poster
   end
 
@@ -31,9 +35,9 @@ class Show < ActiveRecord::Base
     @_name ||= series.series_name
   end
 
-  #private
+  private
   def tvdb
-    Tvdbr::Client.new("277A0FDBB2D8636F")
+    Tvdbr::Client.new(ENV["TVDBR"])
   end
 
   def series
