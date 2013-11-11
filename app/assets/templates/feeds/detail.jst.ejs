@@ -1,0 +1,7 @@
+<% if(episode.get("watched")) { %>
+<a href="#" class="show watched">
+<% } else { %>
+<a href="#" class="show">
+<% } %>
+<%= episode.escape("name") %>
+</a>

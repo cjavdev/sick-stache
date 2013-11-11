@@ -7,6 +7,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
+gem 'bootstrap-sass', '~> 3.0.2.0'
 
 gem 'jquery-rails'
 group :test do
@@ -20,3 +21,5 @@ end
 gem 'tvdbr'
 gem 'figaro'
 gem 'debugger'
+gem 'therubyracer'
+gem 'backbone-on-rails'

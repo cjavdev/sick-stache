@@ -1,2 +1,10 @@
-<h1>Shows#new</h1>
-<p>Find me in app/views/shows/new.html.erb</p>
+<input type="text" name="show[name]" value="" id="name" class="typeahead">
+
+<script>
+$(function(){
+    $('#name').typeahead([{
+        name: 'show_name',
+        remote: '/shows/titles?q=%QUERY'
+    }]);
+})
+</script>

@@ -1,8 +1,25 @@
 class Episode < ActiveRecord::Base
-  attr_accessible :db_id, :name, :show_id
+  attr_accessible :db_id, :name, :show_id, :watched, :downloaded
   validates :db_id, uniqueness: true, presence: true
-
+  before_save :update_cached_attrs
   belongs_to :show
+
+  def self.refresh
+    Show.all.each do |show|
+      show.fetch_episodes
+    end
+  end
+
+  def self.new_from_obj ep
+    e = Episode.new
+    e.db_id = ep.id    
+    e
+  end
+
+  def update_cached_attrs
+    self.first_aired ||= air_date 
+    self.name ||= ep_name
+  end
 
   def season_number
     @_sn ||= episode.season_number 
@@ -28,7 +45,11 @@ class Episode < ActiveRecord::Base
     @_overview ||= episode.overview 
   end
 
-  def name
+  def air_date 
+    @_first_aired ||= episode.first_aired 
+  end
+
+  def ep_name
     @_name ||= episode.episode_name 
   end
 

@@ -11,3 +11,17 @@
  *= require_self
  *= require_tree .
  */
+
+.shows {
+
+}
+
+.shows__show {
+
+}
+
+.watched {
+  color: #DD0DDD;
+  text-decoration: none;
+}
+

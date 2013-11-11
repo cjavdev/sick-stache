@@ -1,4 +1,6 @@
-<input type="text" name="show[name]" value="" id="name" class="typeahead">
+<h1>Shows Index</h1>
+
+<input type="text" name="show[name]" value="" id="name" class="typeahead" placeholder="Add Show">
 <script>
   $(function(){
     $('#name').typeahead([{
@@ -21,14 +23,6 @@
     });
   });
 </script>
+<br><br>
+<div id="shows"></div>
 
-<ul class="shows">
-  <% @shows.each do |show| %>
-  <li class="shows__show">
-
-  <a href="#" data-id="<%= show.id %>" class="<%= 'watched' if show.watched %>">
-    <%= show.name %>
-  </a>
-  </li>
-  <% end %>
-</ul>

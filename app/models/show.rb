@@ -1,7 +1,27 @@
 class Show < ActiveRecord::Base
-  attr_accessible :db_id, :name
+  attr_accessible :db_id, :last_updated
   validates :db_id, uniqueness: true, presence: true
   has_many :episodes
+
+  def self.names_like str
+    tvdb.find_all_series_by_title(str).map do |s|
+      s.series_name
+    end
+  end
+
+  def self.new_with_name str
+    s = Show.new
+    s.db_id = tvdb.find_all_series_by_title(str).first.id    
+    s
+  end
+
+  def fetch_episodes
+    if series.episodes.count > self.episodes.count
+      series.episodes.each do |ep|
+        self.episodes << Episode.new_from_obj(ep)
+      end
+    end
+  end
 
   def actors
     @_actors ||= series.actors
@@ -36,6 +56,10 @@ class Show < ActiveRecord::Base
   end
 
   private
+  def self.tvdb
+    Tvdbr::Client.new(ENV["TVDBR"])
+  end
+
   def tvdb
     Tvdbr::Client.new(ENV["TVDBR"])
   end

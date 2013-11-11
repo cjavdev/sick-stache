@@ -11,21 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131105230206) do
+ActiveRecord::Schema.define(:version => 20131111053507) do
 
   create_table "episodes", :force => true do |t|
     t.integer  "show_id"
     t.integer  "db_id"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.date     "first_aired"
+    t.boolean  "watched"
+    t.boolean  "downloaded"
   end
 
   create_table "shows", :force => true do |t|
     t.integer  "db_id"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.boolean  "watched"
+    t.datetime "last_updated"
   end
 
 end
