@@ -1,7 +1,8 @@
 class Show < ActiveRecord::Base
-  attr_accessible :db_id, :last_updated
+  attr_accessible :db_id, :last_updated, :name
   validates :db_id, uniqueness: true, presence: true
   has_many :episodes
+  before_save :update_cached_attrs
 
   def self.names_like str
     tvdb.find_all_series_by_title(str).map do |s|
@@ -13,6 +14,10 @@ class Show < ActiveRecord::Base
     s = Show.new
     s.db_id = tvdb.find_all_series_by_title(str).first.id    
     s
+  end
+
+  def update_cached_attrs
+    self.name ||= series.series_name
   end
 
   def fetch_episodes
@@ -51,8 +56,12 @@ class Show < ActiveRecord::Base
     @_poster ||= series.poster
   end
 
-  def name
-    @_name ||= series.series_name
+  def _name
+    unless self.name
+      self.name = series.series_name
+      self.save!
+    end
+    self.name
   end
 
   private

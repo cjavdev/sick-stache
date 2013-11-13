@@ -12,16 +12,14 @@
  *= require_tree .
  */
 
-.shows {
-
+input {
+  outline: 0;
+  border: 0px;
+  border-bottom: 1px solid black;
+  width: 100%;
+  font-size: 3em; 
 }
 
-.shows__show {
 
-}
-
-.watched {
-  color: #DD0DDD;
-  text-decoration: none;
-}
+@import "bootstrap";
 

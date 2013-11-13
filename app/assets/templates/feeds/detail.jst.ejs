@@ -1,7 +1,18 @@
-<% if(episode.get("watched")) { %>
-<a href="#" class="show watched">
-<% } else { %>
-<a href="#" class="show">
-<% } %>
-<%= episode.escape("name") %>
-</a>
+<td>
+  <%= episode.escape("show_name") %>
+</td>
+<td>
+  <small>
+    S<%= episode.sNum() %>E<%= episode.eNum() %>
+  </small>
+  <%= episode.escape("name") %>
+</td>
+<td>
+  <span class="pull-right small"><%= episode.first_aired() %></span>
+</td>
+<td>
+  <span class="fa fa-cloud-download dl"></span>
+</td>
+<td>
+  <span class="fa fa-eye show"></span>
+</td>

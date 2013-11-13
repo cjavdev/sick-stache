@@ -1,21 +1,25 @@
 class EpisodesController < ApplicationController
   def index
-    Episode.refresh
-    @episodes = Episode.order('first_aired DESC')
-    render json: @episodes
+    @episodes = Episode.includes(:show).order('first_aired DESC').page(params[:page])
+    render handlers: [:rabl]
   end
 
   def show
-    @episode = Episode.find(params[:id])
-    render json: @episode
+    @episode = Episode.includes(:show).find(params[:id])
+    render handlers: [:rabl] 
   end
 
   def update
     @episode = Episode.find(params[:id])
     if @episode.update_attributes(params[:episode])
-      render json: @episode
+      render "show.rabl" 
     else
       render json: @episode.errors.full_messages, status: 422
     end 
+  end
+
+  def refresh
+    Episode.refresh
+    head :ok    
   end
 end

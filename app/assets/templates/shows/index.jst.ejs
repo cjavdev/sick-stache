@@ -1,28 +1,7 @@
 <h1>Shows Index</h1>
 
 <input type="text" name="show[name]" value="" id="name" class="typeahead" placeholder="Add Show">
-<script>
-  $(function(){
-    $('#name').typeahead([{
-      name: 'show_name',
-      remote: '/shows/titles?q=%QUERY'
-      }]).bind('typeahead:selected', function (obj, datum) {
-      $.ajax({
-        url: "/shows",
-        type: "POST",
-        data: datum,
-        success: function(){
-          debugger; 
-        },
-        error: function() {
-          debugger;
-        }
-      });
-      console.log(obj);
-      console.log(datum);
-    });
-  });
-</script>
+
 <br><br>
 <div id="shows"></div>
 

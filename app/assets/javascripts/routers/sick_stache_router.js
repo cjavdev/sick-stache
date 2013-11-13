@@ -3,10 +3,10 @@ SickStache.Router = Backbone.Router.extend({
         this.$rootEl = options.$rootEl;
     },
     routes: {
-        "": "index",
-        "feed": "feed"
+        "": "feed",
+        "shows": "shows"
     },
-    index: function() {
+    shows: function() {
         var showIndex = new SickStache.Views.ShowsIndex({
             collection: SickStache.shows
         });
@@ -14,14 +14,9 @@ SickStache.Router = Backbone.Router.extend({
     },
     feed: function() {
         var that = this;
-        SickStache.episodes = new SickStache.Collections.Episodes();
-        SickStache.episodes.fetch({
-          success: function() {
-            var feedIndex = new SickStache.Views.FeedIndex({
-                collection: SickStache.episodes
-            });
-            that.$rootEl.html(feedIndex.render().$el);
-          }
+        var feedIndex = new SickStache.Views.FeedIndex({
+            collection: SickStache.episodes
         });
+        that.$rootEl.html(feedIndex.render().$el);
     }
 });

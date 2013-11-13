@@ -6,5 +6,6 @@ SickStache::Application.routes.draw do
   resources :shows do
     resources :episodes
   end
+  get "episodes/refresh", to: "episodes#refresh"
   resources :episodes
 end

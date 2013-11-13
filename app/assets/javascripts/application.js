@@ -12,10 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
-//= require typeahead.min
 //= require underscore
 //= require backbone
+//= require bootstrap
+//= require moment.min
+//= require typeahead.min
 //= require sick_stache
 //= require_tree ../templates
 //= require_tree ./models
