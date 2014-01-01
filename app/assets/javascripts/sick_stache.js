@@ -16,7 +16,7 @@ window.SickStache = {
     SickStache.episodes.fetch({
       success: function() {
         new SickStache.Router({
-          $rootEl: that.$main 
+          $rootEl: that.$main
         });
         Backbone.history.start();
       }
@@ -32,6 +32,6 @@ $(function(){
   SickStache.initialize({
      $header : $('#header'),
      $main : $('#main'),
-     $notice : $('#notice') 
+     $notice : $('#notice')
   });
 });
